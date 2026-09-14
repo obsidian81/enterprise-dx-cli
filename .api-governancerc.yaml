@@ -1,0 +1,5 @@
+﻿rules:
+  REQ-001-CORRELATION-ID: false
+  PATH-003-KEBAB-CASE:
+    enabled: true
+    severity: warning
