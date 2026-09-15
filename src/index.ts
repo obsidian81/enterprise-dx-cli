@@ -1,9 +1,13 @@
-﻿import { Command } from "commander";
+﻿#!/usr/bin/env node
+import { Command } from "commander";
 import pc from "picocolors";
 import { loadSpecFile } from "./utils/fileLoader.js";
 import { loadConfigFile } from "./utils/configLoader.js";
 import { runGovernanceChecks } from "./rules/engine.js";
 import { renderOutput, OutputFormat, type ReporterViolation } from "./reporters.js";
+
+
+
 
 const program = new Command();
 
