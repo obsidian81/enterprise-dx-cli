@@ -36,6 +36,7 @@ jobs:
       - name: Generate JUnit Test Report
         if: always()
         run: npx tsx src/index.ts lint openapi.json -f junit > junit-report.xml
+        continue-on-error: true
 
       - name: Publish Test Report & Annotations
         uses: dorny/test-reporter@v1
