@@ -5,7 +5,7 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/paymentMethods": {
+   "/payment-methods": {
       "post": {
         "summary": "Create payment method",
         "parameters": [
