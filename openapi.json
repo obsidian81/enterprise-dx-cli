@@ -1,1 +1,52 @@
-{"openapi":"3.0.0","info":{"title":"Payments API","version":"1.0.0"},"paths":{"/paymentMethods":{"post":{"summary":"Process payment","parameters":[],"responses":{"200":{"description":"Success"}}}}}}
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Payments API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/payment-methods": {
+      "post": {
+        "summary": "Create payment method",
+        "parameters": [
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request - Standard RFC7807 Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": { "type": "string" },
+          "title": { "type": "string" },
+          "status": { "type": "integer" },
+          "detail": { "type": "string" }
+        }
+      }
+    }
+  }
+}
