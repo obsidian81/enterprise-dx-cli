@@ -6,6 +6,11 @@ on:
   push:
     branches: [ main ]
 
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+
 jobs:
   governance-lint:
     name: Run API Governance Checks
@@ -26,14 +31,16 @@ jobs:
 
       - name: Run API Linter (Console Table)
         run: npx tsx src/index.ts lint openapi.json
+        continue-on-error: true
 
       - name: Generate JUnit Test Report
         if: always()
         run: npx tsx src/index.ts lint openapi.json -f junit > junit-report.xml
 
-      - name: Upload JUnit Results
-        uses: actions/upload-artifact@v4
+      - name: Publish Test Report & Annotations
+        uses: dorny/test-reporter@v1
         if: always()
         with:
-          name: junit-report
+          name: Governance Rules Evaluation
           path: junit-report.xml
+          reporter: java-junit
